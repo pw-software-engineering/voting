@@ -1,11 +1,13 @@
 var http = new XMLHttpRequest();
-var url = '/api/voting';
-var cats = 'cats'
-var dogs = 'dogs'
+// var url = '/api/voting';
+var url = "http://localhost:49153/Voting"
+
+var catsKey = 'cats'
+var dogsKey = 'dogs'
 
 function refreshView(){
-  var catsCount = parseInt(window.sessionStorage.getItem(cats), 10);
-  var dogsCount = parseInt(window.sessionStorage.getItem(dogs), 10);
+  var catsCount = parseInt(window.sessionStorage.getItem(catsKey), 10);
+  var dogsCount = parseInt(window.sessionStorage.getItem(dogsKey), 10);
   var catsLabel = document.getElementById('lblCats');
   var dogsLabel = document.getElementById('lblDogs');
 
@@ -13,6 +15,11 @@ function refreshView(){
 
   catsLabel.innerHTML = catsCount;
   dogsLabel.innerHTML = dogsCount;
+}
+
+function displayError(text) {
+  var errorLabel = document.getElementById('lblError');
+  errorLabel.innerHTML = text;
 }
 
 function refreshState(){
@@ -23,11 +30,11 @@ function refreshState(){
       var response = JSON.parse(http.responseText);
       var cats = response[0];
       var dogs = response[1];
-      var catsCount = typeof(cats) !== 'undefined' ? k8s.count : 0;
-      var dogsCount = typeof(dogs) !== 'undefined' ? sf.count : 0;
+      var catsCount = typeof(cats) !== 'undefined' ? cats.numberOfVotes : 0;
+      var dogsCount = typeof(dogs) !== 'undefined' ? dogs.numberOfVotes : 0;
       
-      window.sessionStorage.setItem(cats, catsCount);
-      window.sessionStorage.setItem(dogs, dogsCount);
+      window.sessionStorage.setItem(catsKey, catsCount);
+      window.sessionStorage.setItem(dogsKey, dogsCount);
       refreshView();
     }
   }
@@ -50,9 +57,17 @@ document.getElementById('btnReset').addEventListener('click', () => {
     http.setRequestHeader('Content-Type', 'application/json');
     http.onreadystatechange = () => {
       if (http.readyState == XMLHttpRequest.DONE) {
-        refreshState();
+        if(http.status == 200)
+        {
+          refreshState();
+        }
+        else
+        {
+          displayError(http.responseText);
+        }
       }
     }
+    
     http.send();
 });
 
@@ -63,7 +78,14 @@ function sendXhrRequest(id) {
   http.setRequestHeader('Content-Type', 'application/json');
   http.onreadystatechange = () => {
     if (http.readyState == XMLHttpRequest.DONE) {
-      refreshState();
+      if(http.status == 200)
+      {
+        refreshState();
+      }
+      else
+      {
+        displayError(http.responseText);
+      }
     }
   }
   http.send(JSON.stringify({
