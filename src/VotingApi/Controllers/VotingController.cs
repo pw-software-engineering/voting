@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using VotingApi.Model;
 
 namespace VotingApi.Controllers
 {
@@ -24,9 +25,9 @@ namespace VotingApi.Controllers
         }
 
         [HttpPut]
-        public void Put(int voteId)
+        public void Put(VotingRequest request)
         {
-            _repository.Increment(voteId);
+            _repository.Increment(request.VoteId);
         }
 
         [HttpDelete]

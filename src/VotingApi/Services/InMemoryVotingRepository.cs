@@ -33,7 +33,7 @@ namespace VotingApi
             _repository = new Dictionary<int, VoteModel>
             {
                 [0] = new() { Id = 0, Name = "Cats", NumberOfVotes = 0 },
-                [1] = new() { Id = 1, Name = "Dogs", NumberOfVotes = 1 }
+                [1] = new() { Id = 1, Name = "Dogs", NumberOfVotes = 0 }
             };
         }
     }

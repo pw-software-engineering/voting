@@ -20,7 +20,7 @@ namespace VotingApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IVotingRepository, InMemoryVotingRepository>();
+            services.AddSingleton<IVotingRepository, InMemoryVotingRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VotingApi", Version = "v1" });
@@ -38,6 +38,13 @@ namespace VotingApi
             }
 
             app.UseRouting();
+            app.UseCors(cp =>
+            {
+                cp.AllowAnyMethod();
+                cp.AllowAnyOrigin();
+                cp.AllowAnyHeader();
+                //cp.WithOrigins("localhost");
+            });
 
             app.UseAuthorization();
 
