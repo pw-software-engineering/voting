@@ -1,0 +1,14 @@
+**/Dockerfile
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/.toolstarget
+
+deployment
+pipelines
+utils
