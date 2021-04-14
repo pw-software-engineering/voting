@@ -23,7 +23,7 @@ namespace VotingApi.Controllers
             return _repository.GetAll();
         }
 
-        [HttpPost]
+        [HttpPut]
         public void Put(int voteId)
         {
             _repository.Increment(voteId);
