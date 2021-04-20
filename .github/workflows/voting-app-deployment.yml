@@ -1,0 +1,21 @@
+name: DeployFrontApp
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - 'src/VotingApp/**'
+    
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build image
+      run: docker build . --file 'src/VotingApp/Docker --tag my-image-name:$(date +%s)
