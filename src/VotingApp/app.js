@@ -1,6 +1,5 @@
 var http = new XMLHttpRequest();
-// var url = '/api/voting';
-var url = "http://localhost:49153/Voting"
+var url = '/api/voting';
 
 var catsKey = 'cats'
 var dogsKey = 'dogs'
