@@ -4,4 +4,8 @@
 FROM nginx:1.19-alpine
 RUN apk update
 
-COPY VotingApp/ /usr/share/nginx/html
+COPY ./ /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
