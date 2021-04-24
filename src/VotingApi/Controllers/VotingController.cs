@@ -6,7 +6,7 @@ using VotingApi.Model;
 namespace VotingApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class VotingController : ControllerBase
     {
         private readonly ILogger<VotingController> _logger;
