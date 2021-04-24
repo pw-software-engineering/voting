@@ -27,10 +27,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set IMAGE_ID env variable
       run: |
-      echo "IMAGE_ID=${{ secrets.ACR_URL }}/${{ env.APP_NAME }}:v${{ env.GITHUB_RUN_NUMBER }}" >> $GITHUB_ENV
+        echo "IMAGE_ID=${{ secrets.ACR_URL }}/${{ env.APP_NAME }}:v${{ env.GITHUB_RUN_NUMBER }}" >> $GITHUB_ENV
     - name: Print IMAGE_ID
       run: |
-      echo "IMAGE_ID:${{ env.IMAGE_ID }}"
+        echo "IMAGE_ID:${{ env.IMAGE_ID }}"
     - name: Login to ACR
       uses: docker/login-action@v1
       with:
@@ -39,7 +39,7 @@ jobs:
         password: ${{ secrets.ACR_USER_PASSWORD }}
     - name: Build docker image
       run: |
-      docker build -f VotingApp.Dockerfile src/VotingApp/. -t $IMAGE_ID
+        docker build -f VotingApp.Dockerfile src/VotingApp/. -t $IMAGE_ID
     - name: Push docker image
       run: |
-      docker push ${{ env.IMAGE_ID }}
+        docker push ${{ env.IMAGE_ID }}
