@@ -6,9 +6,6 @@ on:
     paths:
     - 'src/VotingApp/**'
     - 'VotingApp.Dockerfile'
-    
-  pull_request:
-    branches: [ main ]
 
 env:
   version: $(date +%s)
