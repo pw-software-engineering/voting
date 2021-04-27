@@ -61,7 +61,7 @@ jobs:
     - name: Deploy app to the cluster
       run: kubectl apply -f deployment/out-${{ env.DEPLOYMENT_FILE_NAME }} --wait
     - name: Substitute environment variables in ingress file
-      run: envsubst < "deployment/ingress.yml" > "deployment/out-ingress.yml
+      run: envsubst < "deployment/ingress.yml" > "deployment/out-ingress.yml"
     - name: ECHO substitution
       run: cat deploymnet/out-ingress.yml
     - name: Deploy ingress to the cluster
