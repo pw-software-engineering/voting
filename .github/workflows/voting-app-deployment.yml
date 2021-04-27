@@ -63,6 +63,6 @@ jobs:
     - name: Substitute environment variables in ingress file
       run: envsubst < "deployment/ingress.yml" > "deployment/out-ingress.yml"
     - name: ECHO substitution
-      run: cat deploymnet/out-ingress.yml
+      run: cat deployment/out-ingress.yml
     - name: Deploy ingress to the cluster
       run: kubectl apply -f deployment/out-ingress.yml --wait
