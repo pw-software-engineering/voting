@@ -38,7 +38,7 @@ jobs:
         username: ${{ secrets.ACR_USER_ID }}
         password: ${{ secrets.ACR_USER_PASSWORD }}
     - name: Build docker image
-      run: docker build -f ${{ env.PATH_TO_DOCKER_FILE }} ${{ env.PATH_TO_SRC }} -t ${{ env.IMAGE_ID }}
+      run: docker build -f ${{ env.PATH_TO_DOCKER_FILE }} ${{ env.PATH_TO_APP_SRC }} -t ${{ env.IMAGE_ID }}
     - name: Push docker image
       run: docker push ${{ env.IMAGE_ID }}
     # DEPLOYMENT
