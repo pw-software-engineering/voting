@@ -51,7 +51,7 @@ metadata:
   name: voting-api
   namespace: ${NAMESPACE}
   labels:
-    name: voting
+    name: voting-api
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:

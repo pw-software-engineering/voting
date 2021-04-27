@@ -26,17 +26,17 @@ Each separate service should contains its' deployment file.
 Below there is example of `deployment-file` of `voting-api` backend solution.
 
 Please put attention that very often it contains `voting-api` as the name.  
-`This need to be changed in your application`  
-In your case it will be {server, client, hotel}.
+`This need to be replaced in your application deployments`  
+In your case it will be {server, client or hotel}.
 
 Deployment file contains few sections: `namespace`, `deployment`, `service` and `ingress`.  
 
 Short explanation of some resources in deployment file:
 
-- `Namespace` is location where your application will be hosted  
+- `Namespace` is logical divider of platform to smaller clusters, scoped your project  
 - `Deployment` is responsible to host and keep running your application  
 - `Service` is responsible to build network abstraction to your application  
-- `Ingress` is responsible for accessibility to your application from web  
+- `Ingress` build accessibility to your application from web  
 
 > Example of deployment file for application
 ```yml

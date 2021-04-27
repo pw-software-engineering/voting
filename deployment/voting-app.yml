@@ -49,7 +49,7 @@ metadata:
   name: voting-app
   namespace: ${NAMESPACE}
   labels:
-    name: voting
+    name: voting-app
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
