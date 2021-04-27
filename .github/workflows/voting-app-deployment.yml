@@ -29,7 +29,7 @@ jobs:
     - name: Print IMAGE_ID
       run: echo "IMAGE_ID:${{ env.IMAGE_ID }}"
     - name: Set DOMAIN env variable
-      run: echo "DOMAIN==$(az aks show -g ${{ env.AKS_RG_NAME }} -n ${{ env.AKS_NAME }} --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o tsv) >> $GITHUB_ENV
+      run: echo "DOMAIN==$(az aks show -g ${{ env.AKS_RG_NAME }} -n ${{ env.AKS_NAME }} --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o tsv)" >> $GITHUB_ENV
     - name: Print DOMAIN
       run: echo "${{ env.DOMAIN }}"
     - name: Login to ACR
