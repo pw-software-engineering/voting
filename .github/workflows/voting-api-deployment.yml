@@ -11,6 +11,7 @@ on:
     paths:
     - 'src/VotingApi/**'
     - 'VotingApi.Dockerfile'
+    - 'deployment/voting-api.yml'
 
 env:
   ACR_URL: 'powoeuwacr.azurecr.io'
