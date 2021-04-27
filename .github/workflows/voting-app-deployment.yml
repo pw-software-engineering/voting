@@ -13,14 +13,13 @@ on:
     - 'VotingApp.Dockerfile'
 
 env:
-  AKS_NAME: ${{ secrets.AKS_NAME }}
-  AKS_RG_NAME: ${{ secrets.AKS_RG_NAME }}
   ACR_URL: 'powoeuwacr.azurecr.io'
-  OUTPUT_DIR: 'out'
-  NAMESPACE: 'voting'                     # Name of your team {b, j, n}
-  APP_NAME: 'voting-app'                  # Name of your application {client, server, hotel}
-  DEPLOYMENT_FILE_NAME: 'voting-app.yml'  # Name of deployment file for application
-
+  NAMESPACE: 'voting'                         # Name of your team {b, j, n}
+  APP_NAME: 'voting-app'                      # Name of your application {client, server, hotel}
+  DEPLOYMENT_DIRECTORY: 'deployment'          # Path to directory where DEPLOYMENT_FILE_NAME is located
+  DEPLOYMENT_FILE_NAME: 'voting-app.yml'      # Name of deployment file for application in deployment location
+  PATH_TO_DOCKER_FILE: 'VotingApp.Dockerfile' # Location of Dockerfile for app
+  PATH_TO_APP_SRC: 'src/VotingApp/.'          # Path to App sources
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,7 +36,7 @@ jobs:
         username: ${{ secrets.ACR_USER_ID }}
         password: ${{ secrets.ACR_USER_PASSWORD }}
     - name: Build docker image
-      run: docker build -f VotingApp.Dockerfile src/VotingApp/. -t ${{ env.IMAGE_ID }}
+      run: docker build -f ${{ env.PATH_TO_DOCKER_FILE }} ${{ env.PATH_TO_APP_SRC }} -t ${{ env.IMAGE_ID }}
     - name: Push docker image
       run: docker push ${{ env.IMAGE_ID }}
     # DEPLOYMENT
@@ -50,19 +49,13 @@ jobs:
     - uses: azure/aks-set-context@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        cluster-name: ${{ env.AKS_NAME }}
-        resource-group: ${{ env.AKS_RG_NAME }}
+        cluster-name: ${{ secrets.AKS_NAME }}
+        resource-group: ${{ secrets.AKS_RG_NAME }}
     - name: Set DOMAIN env variable
-      run: echo "DOMAIN=$(az aks show -g ${{ env.AKS_RG_NAME }} -n ${{ env.AKS_NAME }} --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o tsv)" >> $GITHUB_ENV
+      run: echo "DOMAIN=$(az aks show -g ${{ secrets.AKS_RG_NAME }} -n ${{ secrets.AKS_NAME }} --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o tsv)" >> $GITHUB_ENV
     - name: Print DOMAIN
       run: echo "${{ env.DOMAIN }}"
     - name: Substitute environment variables in app deployment file
-      run: envsubst < "deployment/${{ env.DEPLOYMENT_FILE_NAME }}" > "deployment/out-${{ env.DEPLOYMENT_FILE_NAME }}"
+      run: envsubst < "${{ env.DEPLOYMENT_DIRECTORY }}/${{ env.DEPLOYMENT_FILE_NAME }}" > "${{ env.DEPLOYMENT_DIRECTORY }}/out-${{ env.DEPLOYMENT_FILE_NAME }}"
     - name: Deploy app to the cluster
-      run: kubectl apply -f deployment/out-${{ env.DEPLOYMENT_FILE_NAME }} --wait
-    - name: Substitute environment variables in ingress file
-      run: envsubst < "deployment/ingress.yml" > "deployment/out-ingress.yml"
-    - name: ECHO substitution
-      run: cat deployment/out-ingress.yml
-    - name: Deploy ingress to the cluster
-      run: kubectl apply -f deployment/out-ingress.yml --wait
+      run: kubectl apply -f ${{ env.DEPLOYMENT_DIRECTORY }}/out-${{ env.DEPLOYMENT_FILE_NAME }} --wait

@@ -42,3 +42,22 @@ spec:
   - port: 80
   selector:
     app: voting-app
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: voting-app
+  namespace: ${NAMESPACE}
+  labels:
+    name: voting
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: ${NAMESPACE}.${DOMAIN}
+    http:
+      paths:
+      - backend:
+          serviceName: voting-app
+          servicePort: 80
+        path: /

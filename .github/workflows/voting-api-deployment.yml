@@ -14,7 +14,6 @@ on:
 
 env:
   ACR_URL: 'powoeuwacr.azurecr.io'
-  OUTPUT_DIR: 'out'
   NAMESPACE: 'voting'                         # Name of your team {b, j, n}
   APP_NAME: 'voting-api'                      # Name of your application {client, server, hotel}
   DEPLOYMENT_DIRECTORY: 'deployment'          # Path to directory where DEPLOYMENT_FILE_NAME is located
