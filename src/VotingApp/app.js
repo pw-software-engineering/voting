@@ -1,5 +1,5 @@
 var http = new XMLHttpRequest();
-var url = '/api/voting';
+var url = '${API_BASE_URL}/api/voting';
 
 var catsKey = 'cats'
 var dogsKey = 'dogs'
