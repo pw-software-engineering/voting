@@ -11,12 +11,12 @@ services:
       - voting-api
     build:
       context: ./src/VotingApp/
-      dockerfile: VotingApp.Dockerfile
+      dockerfile: ${PWD:-.}/VotingApp.Dockerfile
   voting-api:
     image: voting-api:v1
     ports:
       - "8081:80"
     build:
       context: ./src/VotingApi/
-      dockerfile: VotingApi.Dockerfile
+      dockerfile: ${PWD:-.}/VotingApi.Dockerfile
 
