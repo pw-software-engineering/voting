@@ -34,11 +34,11 @@ jobs:
         dotnet-version: 5.0.x
     - name: Test
       #run: dotnet test  --verbosity normal # --logger GitHubActions
-      run: dotnet test src/VotingApi/VotingApi.Tests/VotingApi.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info
+      run: dotnet test ${{ env.PATH_TO_TEST_PROJECT }} /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info
     - name: TestReporter
       uses: zyborg/dotnet-tests-report@v1
       with:
-        project_path: ${{ PATH_TO_TEST_PROJECT }}
+        project_path: ${{ env.PATH_TO_TEST_PROJECT }}
         report_name: VotingApi.Tests
         report_title: VotingApi.Tests
         github_token: ${{ secrets.GITHUB_TOKEN }}
