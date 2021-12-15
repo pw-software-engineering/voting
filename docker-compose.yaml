@@ -17,6 +17,6 @@ services:
     ports:
       - "8081:80"
     build:
-      context: ./src/VotingApi/
+      context: ./src/VotingApi/VotingApi.Api/
       dockerfile: ${PWD:-.}/VotingApi.Dockerfile
 

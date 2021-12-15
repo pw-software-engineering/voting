@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingApi", "VotingApi.Api\VotingApi.csproj", "{C21B00D9-4415-46C1-AF37-241B4D80E79F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingApi", "VotingApi\VotingApi.Api\VotingApi.csproj", "{C21B00D9-4415-46C1-AF37-241B4D80E79F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingApi.Tests", "VotingApi.Tests\VotingApi.Tests.csproj", "{136F3731-5009-465C-9861-91B1362777EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingApi.Tests", "VotingApi\VotingApi.Tests\VotingApi.Tests.csproj", "{136F3731-5009-465C-9861-91B1362777EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

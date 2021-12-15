@@ -20,13 +20,28 @@ env:
   DEPLOYMENT_DIRECTORY: 'deployment'          # Path to directory where DEPLOYMENT_FILE_NAME is located
   DEPLOYMENT_FILE_NAME: 'voting-api.yml'      # Name of deployment file for application in deployment location
   PATH_TO_DOCKER_FILE: 'VotingApi.Dockerfile' # Location of Dockerfile for app
-  PATH_TO_APP_SRC: 'src/VotingApi/.'          # Path to App sources
+  PATH_TO_APP_SRC: 'src/VotingApi/VotingApi.Api/.'          # Path to App sources
+  PATH_TO_TEST_PROJECT: 'src/VotingApi/VotingApi.Tests/VotingApi.Tests.csproj'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Setup .NET version
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Test
+      #run: dotnet test  --verbosity normal # --logger GitHubActions
+      run: dotnet test ${{ PATH_TO_TEST_PROJECT }} /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info
+    - name: TestReporter
+      uses: zyborg/dotnet-tests-report@v1
+      with:
+        project_path: ${{ PATH_TO_TEST_PROJECT }}
+        report_name: VotingApi.Tests
+        report_title: VotingApi.Tests
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Set IMAGE_ID as env variable
       run: echo "IMAGE_ID=${{ env.ACR_URL }}/${{ env.APP_NAME }}:v${{ github.run_number }}" >> $GITHUB_ENV
     - name: Print IMAGE_ID
