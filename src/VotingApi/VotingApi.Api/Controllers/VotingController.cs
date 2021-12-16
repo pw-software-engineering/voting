@@ -33,7 +33,7 @@ namespace VotingApi.Controllers
         [HttpDelete]
         public void Reset()
         {
-            _repository.Reset();
+            // _repository.Reset();
         }
     }
 }
