@@ -87,7 +87,7 @@ spec:
   selector:
     app: voting-api
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: voting-api
@@ -101,10 +101,13 @@ spec:
   - host: ${NAMESPACE}.${DOMAIN}
     http:
       paths:
-      - backend:
-          serviceName: voting-api
-          servicePort: 80
-        path: /api
+      - path: /api
+        pathType: Prefix
+        backend:
+          service: 
+            name: voting-api
+            port: 
+              number: 80
 ```
 
 ## Workflow adoption

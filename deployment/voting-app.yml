@@ -57,10 +57,6 @@ spec:
   - host: ${NAMESPACE}.${DOMAIN}
     http:
       paths:
-      # - backend:
-      #     serviceName: voting-app
-      #     servicePort: 80
-      #   path: /
       - path: /
         pathType: Prefix
         backend:

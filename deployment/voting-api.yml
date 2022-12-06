@@ -59,10 +59,6 @@ spec:
   - host: ${NAMESPACE}.${DOMAIN}
     http:
       paths:
-      # - backend:
-      #     serviceName: voting-api
-      #     servicePort: 80
-      #   path: /api
       - path: /api
         pathType: Prefix
         backend:
