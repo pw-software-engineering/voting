@@ -64,12 +64,11 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - uses: azure/setup-kubectl@v1
+    - uses: azure/setup-kubectl@v3
       with:
         version: 'v1.18.8'
-    - uses: azure/aks-set-context@v1
+    - uses: azure/aks-set-context@v3
       with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: ${{ secrets.AKS_NAME }}
         resource-group: ${{ secrets.AKS_RG_NAME }}
     - name: Set IMAGE_ID as env variable
