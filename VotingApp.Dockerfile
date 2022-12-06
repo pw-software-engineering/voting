@@ -14,4 +14,4 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./run-nginx.sh /usr/share/nginx/run-nginx.sh
 RUN chmod +x /usr/share/nginx/run-nginx.sh
 
-CMD ["sh", "/usr/share/nginx/run-nginx.sh"]
+ENTRYPOINT ["/bin/sh", "/usr/share/nginx/run-nginx.sh"]

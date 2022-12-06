@@ -2,20 +2,20 @@ version: '3.4'
 
 services:
   voting-app:
-    image: voting-app:v1
+    image: voting-app:${APP_TAG}
     environment:
-      - API_BASE_URL=http://localhost:8081
+      - API_BASE_URL=${API_BASE_URL}:${API_PORT}
     ports:
-      - "8080:80"
+      - "${APP_PORT}:80"
     depends_on:
       - voting-api
     build:
       context: ./src/VotingApp/
       dockerfile: ${PWD:-.}/VotingApp.Dockerfile
   voting-api:
-    image: voting-api:v1
+    image: voting-api:${APP_TAG}
     ports:
-      - "8081:80"
+      - "${API_PORT}:80"
     build:
       context: ./src/VotingApi/VotingApi.Api/
       dockerfile: ${PWD:-.}/VotingApi.Dockerfile
