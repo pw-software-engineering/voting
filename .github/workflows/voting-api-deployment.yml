@@ -31,7 +31,7 @@ jobs:
     - name: Setup .NET version
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: Test
       #run: dotnet test  --verbosity normal # --logger GitHubActions
       run: dotnet test ${{ env.PATH_TO_TEST_PROJECT }} /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info
