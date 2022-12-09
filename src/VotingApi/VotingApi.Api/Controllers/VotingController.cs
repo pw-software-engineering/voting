@@ -9,7 +9,7 @@ namespace VotingApi.Controllers
     [Route("api/[controller]")]
     public class VotingController : ControllerBase
     {
-        private readonly string test;
+        private readonly string new_variable;
         private readonly ILogger<VotingController> _logger;
         private readonly IVotingRepository _repository;
 
